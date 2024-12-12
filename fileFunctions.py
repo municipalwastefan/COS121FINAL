@@ -1,4 +1,4 @@
-from colorResources import *
+from helpIndex import *
 
 '''
 Initiate
@@ -51,10 +51,10 @@ def createPerson(sLine):
 idGet
 Runs when the search command is entered and an ID is specified.
 '''
-def idGet(id, allPpl):
+def idGet(id, updatedPpl):
    data = 0
 
-   for person in allPpl:
+   for person in updatedPpl:
       if person["id"] == id:
          data = person
          print(data)
@@ -68,17 +68,17 @@ def idGet(id, allPpl):
 idRemove
 Runs when the remove command is entered and an ID is specified.
 '''
-def idRemove(id, allPpl):
+def idRemove(id, updatedPpl):
    data = 0
 
-   for person in allPpl:
+   for person in updatedPpl:
       if person["id"] == id:
          data = person
-         allPpl.pop(person)
-         input(f"Data corresponding to ID number {BLUE}{id}{RESET} has been removed. Would you like to print updated data list? (Y/N)\n:")
-         printContents = printContents.strip().lower()
-         if printContents == "y":
-            print(allPpl)
+         updatedPpl.remove(person)
+         printNew = input(f"Data corresponding to ID number {BLUE}{id}{RESET} has been removed. Would you like to print updated data list? (Y/N)\n:")
+         printNew = printNew.strip().lower()
+         if printNew == "y":
+            print(updatedPpl)
             break
          else:
             break
@@ -86,4 +86,8 @@ def idRemove(id, allPpl):
          continue
    if data == 0:
       print(f"No data found for ID number {BLUE}{id}{RESET}.")
+   else:
+      return updatedPpl
+
+
 
