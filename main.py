@@ -1,5 +1,7 @@
+# Reggie Brohan / 12.09.24 / COS 121 Final Project
 '''
-This file contains the main function of the program, directing the user through operation.
+main.py
+This file contains the main function of the program, that directs the user through operation.
 '''
 
 import csv
@@ -27,6 +29,9 @@ def main():
             continue
     print(f"File {BLUE}{fileInput}{RESET} selected for processing.\nNow initiating file...")
     allPpl = initiate(fileInput)
+    fieldNames = getFieldNames(fileInput)
+    print(fieldNames)
+    # print(allPpl)
     updatedPpl = allPpl
     wasEdited = False
     while True:
@@ -38,7 +43,7 @@ def main():
         elif commandInput == "print":
             print(updatedPpl)
         elif commandInput == "search":
-            searchField = input(f"What field would you like to search by?\n{BLUE}VALID INPUTS{RESET}:{fieldNames[0]}, {fieldNames[1]}, {fieldNames[2]}, {fieldNames[3]}, {fieldNames[4]}, {fieldNames[5]}\n:")
+            searchField = input(f"What field would you like to search by?\n{BLUE}VALID INPUTS{RESET}: {fieldNames[0]}, {fieldNames[1]}, {fieldNames[2]}, {fieldNames[3]}, {fieldNames[4]}, {fieldNames[5]}\n:")
             searchField = searchField.lower().strip()
             if searchField == "id":
                 searchChoice = input("Enter ID of data set you'd like to be returned.\n:")
