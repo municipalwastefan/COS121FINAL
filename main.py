@@ -12,13 +12,14 @@ This is the main function of the program. It starts by asking the user for the n
 It checks if the file exists by attempting to open it. If it doesn't, then the user is notified and prompted to enter a 
 valid file name until an existing file is called.
 Next, the user is asked to enter a command. Entering 'help' displays a list of all possible commands.
-If the user inputs a valid command other than help, it calls its respective function, listed in fileFunctions.
+If the user inputs a valid command other than help, it walks the user through inputs for the function, and then
+calls its respective function, listed in fileFunctions.
 If the user enters "quit", than the program will quit. Before quitting, if the file has been edited, then the edited version
 will be saved to a new csv file called UPDATED_DATA. It uses the csv extension to write the dictionaries back into csv format.
 '''
 def main():
     while True:
-        fileInput = input("Hello user! Please declare the name of the csv file to be processed. NOTE: do NOT include the .csv. Input is case sensitive.\n:")
+        fileInput = input("Hello user! Please declare the name of the csv file to be processed. NOTE: do NOT include the .csv.\n:")
         fileInput = fileInput + ".csv"
         try:
             f = open(fileInput,"r")
@@ -30,8 +31,6 @@ def main():
     print(f"File {BLUE}{fileInput}{RESET} selected for processing.\nNow initiating file...")
     allPpl = initiate(fileInput)
     fieldNames = getFieldNames(fileInput)
-    print(fieldNames)
-    # print(allPpl)
     updatedPpl = allPpl
     wasEdited = False
     while True:
@@ -43,21 +42,27 @@ def main():
         elif commandInput == "print":
             print(updatedPpl)
         elif commandInput == "search":
-            searchField = input(f"What field would you like to search by?\n{BLUE}VALID INPUTS{RESET}: {fieldNames[0]}, {fieldNames[1]}, {fieldNames[2]}, {fieldNames[3]}, {fieldNames[4]}, {fieldNames[5]}\n:")
+            searchField = input(f"What field would you like to search by?\n{BLUE}VALID INPUTS{RESET}: {fieldNames[0]}, {fieldNames[1]}, {fieldNames[2]}, {fieldNames[3]}, {fieldNames[5]}\n:")
             searchField = searchField.lower().strip()
-            if searchField == "id":
-                searchChoice = input("Enter ID of data set you'd like to be returned.\n:")
+            if searchField == fieldNames[0]:
+                searchChoice = input(f"Enter {fieldNames[0]} of data set you'd like to be returned.\n:")
                 searchChoice = searchChoice.strip()
                 dataSearch(searchField, searchChoice, updatedPpl)
-            elif searchField == "first_name":
+            elif searchField == fieldNames[1]:
+                searchChoice = input(f"Enter {fieldNames[1]} of data set you'd like to be returned.\n:")
+                searchChoice = searchChoice.strip()
                 dataSearch(searchField, searchChoice, updatedPpl)
-            elif searchField == "last_name":
+            elif searchField == fieldNames[2]:
+                searchChoice = input(f"Enter {fieldNames[2]} of data set you'd like to be returned.\n:")
+                searchChoice = searchChoice.strip()
                 dataSearch(searchField, searchChoice, updatedPpl)
-            elif searchField == "email":
+            elif searchField == fieldNames[3]:
+                searchChoice = input(f"Enter {fieldNames[3]} of data set you'd like to be returned.\n:")
+                searchChoice = searchChoice.strip()
                 dataSearch(searchField, searchChoice, updatedPpl)
-            elif searchField == "gender":
-                dataSearch(searchField, searchChoice, updatedPpl)
-            elif searchField == "ip_address":
+            elif searchField == fieldNames[5]:
+                searchChoice = input(f"Enter {fieldNames[5]} of data set you'd like to be returned.\n:")
+                searchChoice = searchChoice.strip()
                 dataSearch(searchField, searchChoice, updatedPpl)
             else:
                 print(f"Field {RED}{searchField}{RESET} not found!")
@@ -69,12 +74,13 @@ def main():
         elif commandInput == "add":
             inputList = []
             print("Please follow instructions to add to file. Provide the data for each field as prompted.")
-            try:
-                inputList.append(input("Please enter the id number."))
-            except:
-                print("Please enter a number!")
-            inputList.append(input("Please enter first name."))
-            dataAdd(inputList)
+            
+            inputList.append(input(f"Please enter the {fieldNames[1]}:\n:"))
+            inputList.append(input(f"Please enter the {fieldNames[2]}:\n:"))
+            inputList.append(input(f"Please enter the {fieldNames[3]}:\n:"))
+            inputList.append(input(f"Please enter the {fieldNames[4]}:\n:"))
+            inputList.append(input(f"Please enter the {fieldNames[5]}:\n:"))
+            dataAdd(inputList, updatedPpl)
             wasEdited = True
         elif commandInput == "quit":
             if wasEdited == False:

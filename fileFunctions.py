@@ -84,13 +84,16 @@ def createPerson(sLine):
 
 '''
 dataSearch
-Runs when the search command is entered and an ID is specified.
+Runs when the search command is entered and an ID is specified. It starts by setting the data variable to 0. This is so
+if there is no data for the user's search input found, the program can know to say that it is not present in the data.
+The for loop goes through each person, or individual dictionary in the list updatedPpl, and checks if the 
+
 '''
 def dataSearch(field, searchChoice, updatedPpl):
    data = 0
 
    for person in updatedPpl:
-      if person[field] == searchChoice:
+      if person[field].strip() == searchChoice or person[field].strip().lower() == searchChoice:
          data = person
          print(data)
          break
@@ -134,12 +137,17 @@ dataAdd
 This
 '''
 
-def dataAdd(inputList):
+def dataAdd(inputList, updatedPpl):
    newDataLine = {}
-   for i in len(inputList):
-      newDataLine["id"] = inputList[1]
-
-      newDataLine.append(inputList[i])
+   # newDataId = int(updatedPpl[-1]['id']) + 1
+   newDataLine["id"] = int(updatedPpl[-1]['id']) + 1
+   newDataLine["first_name"] = inputList[0]
+   newDataLine["last_name"] = inputList[1]
+   newDataLine["email"] = inputList[2]
+   newDataLine["gender"] = inputList[3]
+   newDataLine["ip_address"] = inputList[4]
+   print(newDataLine)
+   updatedPpl.append(newDataLine)
 
 
    return newDataLine

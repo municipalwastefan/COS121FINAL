@@ -1,4 +1,5 @@
 '''
+helpIndex.py
 This file contains the code for the formatting of the help index. It also has the variables containing escape codes for
 coloring the text.
 '''
