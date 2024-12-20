@@ -8,6 +8,9 @@ import csv
 from fileFunctions import *
 from helpIndex import *
 '''
+main
+Parameters: none
+Returns: nothing
 This is the main function of the program. It starts by asking the user for the name of the file they'd like to process.
 It checks if the file exists by attempting to open it. If it doesn't, then the user is notified and prompted to enter a 
 valid file name until an existing file is called.
